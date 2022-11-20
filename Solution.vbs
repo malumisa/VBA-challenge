@@ -1,16 +1,20 @@
 Sub Multiple_year_stock_data()
 
 Dim Ws As Worksheet
+   'Set initial variables for worksheet and last row
+Dim Ws As Worksheet
     For Each Ws In ActiveWorkbook.Worksheets
     Ws.Activate
     
         LastRow = Ws.Cells(Rows.Count, 1).End(xlUp).Row
         
+        'Print header row starting with column I
         Cells(1, 9).Value = "Ticker"
         Cells(1, 10).Value = "Yearly Change"
         Cells(1, 11).Value = "Percent Change"
         Cells(1, 12).Value = "Total Stock Volume"
         
+       ' Set initial values for holding Opening price, Closing prie, Yearly change, Ticker name, ercentage change and volume
         Dim OpenPrice As Double
         Dim ClosePrice As Double
         Dim YearlyChange As Double
@@ -29,6 +33,7 @@ Dim Ws As Worksheet
         
         For i = 2 To LastRow
         
+        ' Check if we are still within the same Tick, if we are not ...
         If Cells(i + 1, Column).Value <> Cells(i, Column).Value Then
         TickerName = Cells(i, Column).Value
         Cells(Row, Column + 8).Value = TickerName
@@ -54,6 +59,7 @@ Dim Ws As Worksheet
         End If
         Next i
         
+        'Colour index
         YearlyChangeLastRow = Ws.Cells(Rows.Count, Column + 8).End(xlUp).Row
         For j = 2 To YearlyChangeLastRow
         If (Cells(j, Column + 9).Value > 0 Or Cells(j, Column + 9).Value = 0) Then
@@ -63,6 +69,7 @@ Dim Ws As Worksheet
         End If
         Next j
         
+        ' Greatest increase, decrease, greatest total volume
         Cells(2, Column + 14).Value = "Greatest % Increase"
         Cells(3, Column + 14).Value = "Greatest % Decrease"
         Cells(4, Column + 14).Value = "Greatest Total Volume"
@@ -83,6 +90,5 @@ Dim Ws As Worksheet
         Cells(4, Column + 16).Value = Cells(Z, Column + 11).Value
         End If
         Next Z
-        Next Ws
-        
+        Next Ws     
 End Sub
