@@ -1,6 +1,6 @@
 Sub Multiple_year_stock_data()
 
-Dim Ws As Worksheet
+
    'Set initial variables for worksheet and last row
 Dim Ws As Worksheet
     For Each Ws In ActiveWorkbook.Worksheets
